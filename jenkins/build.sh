@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t pythonapp:1.0 .
+sudo docker build -t pythonapp:1.0 .
