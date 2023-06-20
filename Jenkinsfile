@@ -10,6 +10,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'chmod 777 -R ./jenkins'
+                sh 'chown jenkins:jenkins ./jenkins'
                 sh './jenkins/build.sh'
             }
         }
@@ -29,7 +31,7 @@ pipeline {
 
     post {
         always {
-            
+
             sh './jenkins/logout'
         }
     }
