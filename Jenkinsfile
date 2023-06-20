@@ -21,9 +21,9 @@ pipeline {
                     docker version
                     sudo groupadd docker
                     sudo usermod -aG docker $USER
-                    sudo su $USER
-                    chmod 777 -R ./jenkins
-                    chown jenkins:jenkins ./jenkins
+                    echo $USER
+                    sudo su - $USER
+                    docker ps
                     echo "lets do a docker ps"
                     docker ps
                     ./jenkins/build.sh
