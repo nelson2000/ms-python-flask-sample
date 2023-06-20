@@ -10,10 +10,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker version'
-                sh 'chmod 777 -R ./jenkins'
-                sh 'chown jenkins:jenkins ./jenkins'
-                sh './jenkins/build.sh'
+
+
+                sh '''
+                    docker version
+                    sudo groupadd docker
+                    sudo usermod -aG docker $USER
+                    chmod 777 -R ./jenkins
+                    chown jenkins:jenkins ./jenkins
+                    ./jenkins/build.sh
+                '''
+           
             }
         }
         stage('login') {
