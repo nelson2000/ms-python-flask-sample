@@ -13,11 +13,9 @@ pipeline {
 
 
                 sh '''
-              
-                    docker version
+            
                     sudo useradd jenkins
                     sudo su - jenkins
-                    sudo groupadd docker
                     sudo usermod -aG docker jenkins
                     echo $USER
                     sudo su - jenkins
