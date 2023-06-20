@@ -18,6 +18,8 @@ pipeline {
                     sudo usermod -aG docker $USER
                     chmod 777 -R ./jenkins
                     chown jenkins:jenkins ./jenkins
+                    echo "lets do a docker ps"
+                    docker ps
                     ./jenkins/build.sh
                 '''
            
