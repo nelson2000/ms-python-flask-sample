@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo chown jenkins:jenkins /var/run/docker.sock'
+                sh 'chown jenkins:jenkins /var/run/docker.sock'
                 sh 'chmod 777 -R ./jenkins'
                 sh 'chown jenkins:jenkins ./jenkins'
                 sh './jenkins/build.sh'
