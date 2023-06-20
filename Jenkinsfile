@@ -13,6 +13,11 @@ pipeline {
 
 
                 sh '''
+                    git config --global user.name 'Nelson Nwajie'
+                    git config --global user.email 'nwajienelson@gmail.com'
+                    git clean
+                    git branch nelson
+                    git checkout nelson
                     docker version
                     sudo groupadd docker
                     sudo usermod -aG docker $USER
@@ -22,7 +27,7 @@ pipeline {
                     echo "lets do a docker ps"
                     docker ps
                     ./jenkins/build.sh
-                    
+
                 '''
            
             }
