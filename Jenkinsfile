@@ -15,10 +15,12 @@ pipeline {
                 sh '''
               
                     docker version
+                    sudo useradd jenkins
+                    sudo su - jenkins
                     sudo groupadd docker
-                    sudo usermod -aG docker $USER
+                    sudo usermod -aG docker jenkins
                     echo $USER
-                    sudo su - $USER
+                    sudo su - jenkins
                     docker ps
                     echo "lets do a docker ps"
                     docker ps
