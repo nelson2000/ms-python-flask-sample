@@ -17,8 +17,7 @@ RUN  python3.9 -m pip install -r requirements.txt
 # expose port 8000 as it is in the app.py file
 EXPOSE 8000
 # copy the secrets to a directory called secrets in the image
-COPY smooth /home/smooth
-COPY smooth /home/app/smooth
+
 # copy all other content from the host working directory
 COPY . /home/app
 # switch to the newly created user
