@@ -13,14 +13,7 @@ pipeline {
 
 
                 sh '''
-        
-                    sudo usermod -aG docker jenkins
-                    sudo su - jenkins
-                    docker ps
-                    echo "lets do a docker ps"
-                    docker ps
-                    ./jenkins/build.sh
-
+                    docker build -t pythonapp:1.0 .
                 '''
            
             }
