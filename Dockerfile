@@ -15,7 +15,7 @@ RUN  python3.9 -m pip install -r requirements.txt
 # install dependencies
 #RUN python3 -m pip install -r requirements.txt
 # expose port 8000 as it is in the app.py file
-EXPOSE 8000
+EXPOSE 8500
 # copy the secrets to a directory called secrets in the image
 
 # copy all other content from the host working directory
