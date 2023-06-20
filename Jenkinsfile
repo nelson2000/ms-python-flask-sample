@@ -3,27 +3,34 @@
 pipeline {
     agent any
 
-    stages {
-        stage('code checkout'){
-            steps{
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('nwajienelson-dockerhub')
+    }
 
-                "checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])"
-            }
-        }
+    stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh './jenkins/build.sh'
             }
         }
-        stage('Test') {
+        stage('login') {
             steps {
-                echo 'Testing..'
+
+                
+                sh './jenkins/login.sh'
             }
         }
-        stage('Deploy') {
+        stage('Push') {
             steps {
-                echo 'Deploying....'
+                sh './jenkins/push.sh'
             }
+        }
+    }
+
+    post {
+        always {
+            
+            sh './jenkins/logout'
         }
     }
 }
