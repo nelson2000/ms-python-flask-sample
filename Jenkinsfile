@@ -14,7 +14,7 @@ pipeline {
 
                 sh '''
         
-                    usermod -aG docker jenkins
+                    sudo usermod -aG docker jenkins
                     sudo su - jenkins
                     docker ps
                     echo "lets do a docker ps"
