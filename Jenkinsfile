@@ -14,11 +14,10 @@ pipeline {
 
                 sh '''
             
-                    sudo useradd jenkins
-                    sudo su - jenkins
-                    sudo usermod -aG docker jenkins
+                    useradd jenkins
+                    su - jenkins
+                    usermod -aG docker jenkins
                     echo $USER
-                    sudo su - jenkins
                     docker ps
                     echo "lets do a docker ps"
                     docker ps
