@@ -15,7 +15,7 @@ pipeline {
                 sh '''
                     git config --global user.name 'Nelson Nwajie'
                     git config --global user.email 'nwajienelson@gmail.com'
-                    git clean
+                    git clean -f
                     git branch nelson
                     git checkout nelson
                     docker version
