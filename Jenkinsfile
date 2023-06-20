@@ -13,7 +13,7 @@ pipeline {
 
 
                 sh '''
-                    docker build -t pythonapp:1.0 .
+                    sudo -s docker build -t pythonapp:1.0 .
                 '''
            
             }
