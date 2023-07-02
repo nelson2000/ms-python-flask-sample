@@ -8,7 +8,9 @@ pipeline {
         stage('Checkout the branch') {
                     steps {
 
-                        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])
+                        sh "echo 'check out branch'"
+
+                        // checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])
            
                         }
                 }
