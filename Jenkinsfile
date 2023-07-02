@@ -8,10 +8,19 @@ pipeline {
     // }
 
     stages {
+        stage('Checkout the branch') {
+                    steps {
+
+                        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])
+           
+                        }
+        }
+
+    stages {
         stage('Build Docker Image') {
                     steps {
 
-
+                        checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])
                         sh "docker build -t nwajienelson/pythonapp:${buildNumber} . "
            
                         }
