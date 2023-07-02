@@ -13,7 +13,7 @@ pipeline {
 
 
                 sh '''
-                    sudo -s docker build -t pythonapp:1.0 .
+                        echo 'building....'
                 '''
            
             }
@@ -22,12 +22,16 @@ pipeline {
             steps {
 
                 
-                sh './jenkins/login.sh'
+                sh '''
+                        echo 'login...'
+                '''
             }
         }
         stage('Push') {
             steps {
-                sh './jenkins/push.sh'
+                sh '''
+                        echo 'pushing....'
+                '''
             }
         }
     }
@@ -35,7 +39,9 @@ pipeline {
     post {
         always {
 
-            sh './jenkins/logout'
+            sh '''
+                    echo 'posting...
+            '''
         }
     }
 }
