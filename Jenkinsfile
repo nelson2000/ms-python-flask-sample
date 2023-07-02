@@ -8,13 +8,11 @@ pipeline {
     // }
 
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
 
 
-                sh '''
-                        echo 'building....'
-                '''
+                sh "docker build -t nwajienelson/pythonapp:${buildNumber} . "
            
             }
         }
