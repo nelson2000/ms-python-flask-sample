@@ -10,6 +10,7 @@ pipeline {
                 
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])
             }
+          }
    
         stage('Build Docker Image') {
                     steps {
@@ -48,7 +49,7 @@ pipeline {
             '''
         }
     }
-}
+
 }
 
 
