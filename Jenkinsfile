@@ -9,19 +9,23 @@ pipeline {
 
     stages {
         stage('Build Docker Image') {
-            steps {
+                    steps {
 
 
-                sh "docker build -t nwajienelson/pythonapp:${buildNumber} . "
+                        sh "docker build -t nwajienelson/pythonapp:${buildNumber} . "
            
-            }
+                        }
         }
         stage('login') {
             steps {
 
                 
                 sh '''
-                        echo 'login...'
+                        withCredentials([string(credentialsId: 'dockerhub_pwd', variable: 'dockerhub_pwd')]) {
+                            sh " docker login -u nwajienelson -p ${dockerhub_pwd}
+                        }
+
+                        sh "docker push nwajienelson/pythonapp:${buildNumber}"
                 '''
             }
         }
