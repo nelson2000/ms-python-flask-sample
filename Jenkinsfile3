@@ -43,7 +43,7 @@ pipeline {
       stage('deploy App') {
             steps {
                 
-                sh "echo 'we are deploying to argocd"
+                sh "echo 'we are deploying to argocd'"
                 
             }
         }
