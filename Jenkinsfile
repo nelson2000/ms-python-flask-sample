@@ -1,56 +1,46 @@
-
-
 pipeline {
     agent any
-
+    
+     environment {
+        DOCKER_CREDS = credentials('dockerhub_cred')
+    }
 
     stages {
-          stage('Checkout branch') {
+
+        stage('Checkout branch') {
+
             steps {
                 
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])
             }
-          }
-   
-        stage('Build Docker Image') {
-                    steps {
-
-                        sh "docker build -t nwajienelson/pythonapp:${buildNumber} . "
-           
-                        }
         }
-        stage('login') {
+        
+    stage('docker build') {
             steps {
-
                 
-                sh '''
-                        withCredentials([string(credentialsId: 'dockerhub_pwd', variable: 'dockerhub_pwd')]) {
-                            sh " docker login -u nwajienelson -p ${dockerhub_pwd}"
-                        }
-
-                        sh "docker push nwajienelson/pythonapp:${buildNumber}"
-                '''
+                sh "docker build -t nwajienelson/pythonapp:${BUILD_NUMBER} . "
+                
             }
         }
-        stage ('Push') {
+    
+    stage('docker login') {
             steps {
-                sh '''
-                        echo 'pushing....'
-                '''
+                
+                sh "docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW "
+                
             }
         }
-    }
-
-    post {
-        always {
-
-            sh '''
-                    echo 'posting...'
-            '''
+    
+      stage('docker push') {
+            steps {
+                
+                sh "docker push nwajienelson/pythonapp:${BUILD_NUMBER} "
+                
+            }
         }
+        
+        
+  
+        
     }
-
 }
-
-
-
