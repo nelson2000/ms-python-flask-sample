@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Checkout source code from repository
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nelson2000/ms-python-flask-sample.git']])
+
+                
+                // Build Docker image
+                script {
+                    docker.build('nwajienelson/pythonapp:${BUILD_NUMBER}', './Dockerfile')
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run Docker container
+                script {
+                    docker.image('nwajienelson/pythonapp:${BUILD_NUMBER}').run('-p 8500:8500')
+                }
+                
+                // Run tests against the container
+                sh 'flask run'  // Assuming it's a Node.js project
+                
+                // Stop and remove the container
+                script {
+                    docker.image('nwajienelson/pythonapp:${BUILD_NUMBER}').stop()
+                    docker.image('nwajienelson/pythonapp:${BUILD_NUMBER}').remove(force: true)
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Deploy the Docker container
+                script {
+                    docker.image('my-docker-image:latest').withRun('-p 8080:8080') { container ->
+                        sh 'kubectl apply -f deployment.yaml'  // Assuming Kubernetes deployment
+                    }
+                }
+            }
+        }
+    }
+}

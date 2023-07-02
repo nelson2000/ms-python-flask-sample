@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pythonapp
+  labels:
+    app: pythonapp
+  namespace: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pythonapp
+  template:
+    metadata:
+      labels:
+        app: pythonapp
+    spec:
+      containers:
+      - name: pythonapp
+        image: nwajienelson/pythonapp:${BUILD_NUMBER}
+        ports:
+        - containerPort: 8500
+        resources:
+          requests:
+            memory: "300Mi"
+            cpu: "200m"
+          limits:
+            memory: "600Mi"
+            cpu: "500m"
+   
+
+
+
+
+
+
+
