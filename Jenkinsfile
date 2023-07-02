@@ -43,7 +43,7 @@ pipeline {
       stage('deploy App') {
             steps {
                 
-                sh "docker run -it --p 8500:8500 --name pythonapp nwajienelson/pythonapp:${BUILD_NUMBER}"
+                sh "docker run -it -p 8500:8500 --name pythonapp nwajienelson/pythonapp:${BUILD_NUMBER}"
                 
             }
         }
