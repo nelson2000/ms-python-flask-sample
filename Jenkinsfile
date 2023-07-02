@@ -40,7 +40,7 @@ pipeline {
         always {
 
             sh '''
-                    echo 'posting...
+                    echo 'posting...'
             '''
         }
     }
