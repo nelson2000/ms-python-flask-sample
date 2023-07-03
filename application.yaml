@@ -1,20 +1,42 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: my-app
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/nelson2000/ms-python-flask-sample.git
+#     targetRevision: HEAD
+#     path: argo-yaml
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: frontend
+#   syncPolicy:
+#     syncOptions:
+#     - CreateNamespace=true
+#     automated:
+#       prune: true
+#       selfHeal: true
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: flask-app
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/nelson2000/ms-python-flask-sample.git
-    targetRevision: HEAD
-    path: argo-yaml
+    repoURL: https://SaaS-Development@dev.azure.com/SaaS-Development/SaaS/_git/SaaS-front-end
+    targetRevision: develop
+    path: ArgoCD-manifest
   destination:
     server: https://kubernetes.default.svc
-    namespace: frontend
+    namespace: flask-frontend
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
+
